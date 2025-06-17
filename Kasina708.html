@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Słoneczne chaty Kasina Wielka 708</title>
+  <style>
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: url('MAIN.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-bottom: 2px solid #fbc531;
+      position: relative;
+    }
+    .header-text h1 {
+      font-size: 2.4rem;
+      color: #333;
+    }
+    .header-text p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    .top-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-right a {
+      background-color: #fbc531;
+      color: #000;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      line-height: 1;
+      height: 36px;
+      box-sizing: border-box;
+    }
+    .top-right a:hover {
+      background-color: #e1a400;
+    }
+    .contact-panel {
+      position: fixed;
+      top: 0;
+      left: -700px;
+      width: auto;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      padding: 2rem 1.5rem;
+      transition: left 0.4s ease;
+      z-index: 10000;
+      overflow: hidden;
+    }
+    .contact-panel.open {
+      left: 0;
+    }
+    .contact-panel button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #000;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: none;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.2;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+    }
+    .contact-panel h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .contact-panel p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-image: url('zdjecia/tlo.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 2rem;
+      background-color: rgba(255,255,255,0.95);
+      border-left: 8px solid #fbc531;
+    }
+    .gallery-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .gallery {
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+    .gallery img {
+      width: 70%;
+      display: block;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      user-select: none;
+      margin: 0 auto;
+    }
+    .gallery h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+      text-align: center;
+      width: 100%;
+    }
+    .description {
+      flex: 1;
+      font-style: italic;
+      font-size: 1.1rem;
+      background-color: rgba(255,255,255,0.9);
+      padding: 1.5rem;
+      border-left: 8px solid #e84118;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+    footer {
+      background-color: #76A8FD;
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #000;
+      margin-top: auto;
+      opacity: 0.95;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.5);
+      cursor: pointer;
+      user-select: none;
+    }
+    @media(min-width: 768px) {
+      .container { flex-direction: row; }
+      .gallery-column, .description { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+  <div class="top-right">
+    
+     <a href="strona.html">Strona główna</a>
+      <a href="#" class="contact-btn" onclick="toggleContact()">Kontakt</a>
+  </div>
+  <div class="header-text">
+    <h1>Słoneczne Chaty - Kasina Wielka 708</h1>
+    <br>
+    <p>Trzy domki, pełna wygoda. Wybierz swój klimat!</p>
+  </div>
+</header>
+
+  <main class="container">
+  <div class="gallery-column">
+    
+    <div class="gallery">
+      <h3>Słoneczne Chaty</h3>
+      <img src="sloneczne chaty/7.jpg" alt="Słoneczne Chaty" data-gallery="1" />
+    </div>
+    <div class="gallery">
+      <h3>Słoneczna Chata</h3>
+      <img src="Sloneczna chata/2.jpg" alt="Słoneczna Chata" data-gallery="2" />
+    </div>
+    <div class="gallery">
+      <h3>Chata Jarka</h3>
+      <img src="chatajarka/dom JAREK.JPG" alt="Chata Jarka" data-gallery="0" />
+    </div>
+  </div>
+  <div class="description">
+    W sercu malowniczej Kasiny Wielkiej oferujemy trzy wyjątkowe domy, zaprojektowane z myślą o komforcie, przestrzeni i bliskości natury. Każdy z nich to idealne miejsce na rodzinny urlop, wyjazd z przyjaciółmi lub spokojny weekend z widokiem na góry Lubogoszcz i Śnieżnicę.
+    <br><br>
+    🏡 Słoneczne Chaty (3 domy po 120 m²)
+4 sypialnie | 2 łazienki | salon | kuchnia | taras z widokiem
+
+Trzy przestronne, w pełni wyposażone domy o powierzchni 120 m². Każdy z nich oferuje cztery komfortowe sypialnie, dwie eleganckie łazienki, przytulny salon oraz nowoczesną kuchnię. Atutem każdego domu jest duży taras, z którego rozpościera się malowniczy widok na górskie krajobrazy – idealny na poranną kawę lub wieczorny odpoczynek.
+<br><br>
+☀️ Słoneczna Chata
+3 sypialnie | salon | kuchnia | łazienka | taras z widokiem
+
+Uroczy dom idealny dla rodzin i mniejszych grup. Trzy wygodne sypialnie, jasny salon, w pełni wyposażona kuchnia oraz funkcjonalna łazienka tworzą przestrzeń, w której każdy poczuje się jak w domu. Z tarasu rozciąga się panoramiczny widok na pobliskie szczyty, zapewniając niepowtarzalny klimat wypoczynku.
+<br><br>
+🌳 Słoneczna Chata Jarka
+3 sypialnie | 2 łazienki | duża kuchnia | salon | taras zimowy | ogród z altaną i wiatą
+
+Najbardziej rozbudowana z ofert – dom idealny dla osób ceniących przestrzeń i prywatność. Na gości czekają trzy komfortowe sypialnie, przestronna kuchnia z jadalnią, wygodny salon oraz dwie łazienki. Dom wyposażony jest w taras zimowy, a na zewnątrz znajduje się duży ogród z altaną grillową i wiatą parkingową. To doskonałe miejsce zarówno na letni relaks, jak i zimowe wieczory.
+<br><br>
+💰 Cena już od 500 zł/dobę<br><br>
+📍 Kasina Wielka – zapytaj o dostępność i ofertę w wybranym terminie!
+
+
+
+  </div>
+</main>
+
+
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <img src="" alt="Powiększone zdjęcie" id="modalImage" />
+  </div>
+<div class="contact-panel" id="contactPanel">
+  <button id="closeContact">✕</button>
+  <h2>Kontakt</h2>
+  <p><strong>Telefon:</strong> +48 504 378 344</p>
+    <p><strong>Email:</strong> apartamentykasina@gmail.com</p>
+   <p><strong>Facebook:</strong> <a href="https://www.facebook.com/apartamentykasina/" target="_blank">Apartamenty Kasina</a></p>
+</div>
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+
+    // 3 galerie po 4 zdjęcia
+    const galleries = [
+      ['chatajarka/dom Jarek.jpg', 'chatajarka/DSC_0189.jpg', 'chatajarka/DSC_0201.jpg',],
+      ['sloneczne chaty/7.jpg', 'sloneczne chaty/8.jpg', 'sloneczne chaty/9.jpg', 'sloneczne chaty/10.jpg', 'sloneczne chaty/1.jpg', 'sloneczne chaty/2.jpg', 'sloneczne chaty/3.jpg', 'sloneczne chaty/4.jpg', 'sloneczne chaty/5.jpg', 'sloneczne chaty/6.jpg'],
+      ['Sloneczna chata/2.jpg', 'Sloneczna chata/1.jpg', 'Sloneczna chata/3.jpg', 'Sloneczna chata/4.jpg']
+    ];
+
+    let currentGallery = 0;
+    let currentIndex = 0;
+
+    document.querySelectorAll('.gallery img').forEach((img) => {
+      img.addEventListener('click', () => {
+        currentGallery = parseInt(img.dataset.gallery);
+        currentIndex = 0;
+        modalImage.src = galleries[currentGallery][currentIndex];
+        modal.style.display = 'flex';
+      });
+    });
+
+    modalImage.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleries[currentGallery].length;
+      modalImage.src = galleries[currentGallery][currentIndex];
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target !== modalImage) modal.style.display = 'none';
+    });
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') modal.style.display = 'none';
+    });
+
+
+       const contactPanel = document.getElementById('contactPanel');
+    const closeBtn = document.getElementById('closeContact');
+
+    function toggleContact() {
+      contactPanel.classList.toggle('open');
+    }
+
+    closeBtn.addEventListener('click', () => {
+      contactPanel.classList.remove('open');
+    });
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        contactPanel.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
